@@ -3,9 +3,8 @@ import pandas as pd
 import joblib
 import seaborn as sns
 
-# -------------------------------
-# 🔧 Configuration & Model Loading
-# -------------------------------
+# Configuration & Model Loading
+
 st.set_page_config(page_title="Heart Disease Predictor", layout="wide")
 st.title("❤️ Heart Disease Prediction with PCA & ML")
 
@@ -13,18 +12,16 @@ st.title("❤️ Heart Disease Prediction with PCA & ML")
 numerical_cols = ['age', 'trestbps', 'chol', 'thalch', 'oldpeak', 'ca']
 categorical_cols = ['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'thal']
 
-# Load models and preprocessors
+# Load models and transformers
 pca = joblib.load("../models/pca_transformer.pkl")
 model = joblib.load("../models/best_model.pkl")
 scaler = joblib.load("../models/scaler.pkl")
 encoders = joblib.load("../models/label_encoders.pkl")
+# User Input via Sidebar
 
-# ----------------------------------
-# 🧍 User Input via Sidebar
-# ----------------------------------
 st.sidebar.header("🩺 Patient Information")
 
-# Display-friendly to encoder value mapping
+# Mappings to display for the user
 mapping_dicts = {
     "sex": {"Male": "Male", "Female": "Female"},
     "cp": {
@@ -53,7 +50,7 @@ mapping_dicts = {
 }
 
 
-# Step 1: Get user input using friendly labels
+# Get user input using friendly labels
 input_data = {
     'age': st.sidebar.number_input("Age", min_value=1, max_value=120, value=50),
     'sex': st.sidebar.selectbox("Sex", options=list(mapping_dicts["sex"].keys())),
@@ -70,7 +67,7 @@ input_data = {
     'thal': st.sidebar.selectbox("Thalassemia", options=list(mapping_dicts["thal"].keys())),
 }
 
-# Step 2: Map human-friendly input to model format
+# Map human-friendly input to model format
 for col, mapping in mapping_dicts.items():
     if col in input_data:
         input_data[col] = mapping[input_data[col]]
@@ -78,9 +75,8 @@ for col, mapping in mapping_dicts.items():
 
 input_df = pd.DataFrame([input_data])
 
-# ----------------------------------
-# 🧼 Preprocessing Input Data
-# ----------------------------------
+# Preprocessing Input Data
+
 # Scale numerical features
 input_df[numerical_cols] = scaler.transform(input_df[numerical_cols])
 
@@ -92,9 +88,8 @@ for col in categorical_cols:
     except ValueError as e:
         st.error(f"❌ Invalid value for '{col}': '{val_str}'\n{e}")
 
-# ----------------------------------
-# 🤖 Predict with PCA + Model
-# ----------------------------------
+# Predict with PCA + Model
+
 input_pca = pca.transform(input_df)
 prediction = model.predict(input_pca)[0]
 decision_score = model.decision_function(input_pca)[0]
@@ -106,12 +101,12 @@ else:
     st.success(f"Prediction: **No Heart Disease Detected**")
 st.info(f"Model Confidence Score: `{decision_score:.2f}`")
 
-# ----------------------------------
-# 📊 Data Visualization Section
-# ----------------------------------
+# Data Visualization Section
+
 st.subheader("📊 Heart Disease Trends Explorer")
 
 # Load raw, cleaned dataset for visualization (non-transformed)
+
 data = pd.read_csv("../data/visualized_heart_disease.csv")
 
 tab1, tab2, tab3 = st.tabs(["Age vs Disease", "Cholesterol Distribution", "Interactive Explorer"])
