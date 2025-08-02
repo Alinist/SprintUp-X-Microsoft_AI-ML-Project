@@ -211,7 +211,7 @@ SprintUp-X-Microsoft_AI-ML-Project/
 ## Dataset
 
 - **Heart Disease UCI Dataset**  
-    Available publicly [here](https://archive.ics.uci.edu/ml/datasets/heart+Disease)    
+    Available publicly [here](https://www.kaggle.com/datasets/redwankarimsony/heart-disease-data)    
 
 ---
 
