@@ -1,0 +1,45 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environments
+env/
+venv/
+ENV/
+.venv/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# VS Code settings
+.vscode/
+
+# macOS system files
+.DS_Store
+
+# Model files
+*.pkl
+*.joblib
+
+# Streamlit cache and config
+.streamlit/
+
+# Ngrok files and logs
+*.ngrok2
+
+# Coverage reports
+htmlcov/
+.coverage
+
+# pytest cache
+.pytest_cache/

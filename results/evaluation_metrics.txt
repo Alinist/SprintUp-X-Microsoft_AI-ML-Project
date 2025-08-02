@@ -1,0 +1,7 @@
+Performance Metrics for Best Model (SVM):
+
+Accuracy     : 0.8587
+Precision    : 0.8393
+Recall       : 0.9216
+F1-Score     : 0.8785
+ROC-AUC      : Not supported by model

@@ -1,0 +1,90 @@
+Streamlit + ngrok Setup Instructions
+
+Prerequisites
+
+- Make sure Python is installed.
+- Install Streamlit if you haven't already:
+
+  pip install streamlit
+
+- Download and install ngrok from https://ngrok.com/, and make sure it’s accessible in your system PATH.
+
+---
+
+How to Open the Project and Navigate to the 'ui' Folder
+
+1. Open your terminal or command prompt.
+
+2. Change directory to your project folder:
+
+   On Windows:
+
+   cd C:\path\to\your\project
+
+   On macOS/Linux:
+
+   cd /path/to/your/project
+
+3. Navigate to the 'ui' folder inside your project:
+
+cd ui
+
+4. Verify you are in the 'ui' folder by listing files:
+
+   On Windows:
+
+   dir
+
+   On macOS/Linux:
+
+   ls
+
+You should now be inside the 'ui' directory.
+
+---
+
+Step 1: Run your Streamlit app on port 8051
+
+In your terminal (now inside the 'ui' folder), run:
+
+streamlit run your_app.py --server.port 8051
+
+Replace your_app.py with your Streamlit app’s filename.
+
+---
+
+Step 2: Verify Streamlit app is running
+
+Open your browser and visit:
+
+http://localhost:8051
+
+You should see your Streamlit app running locally.
+
+---
+
+Step 3: Expose your Streamlit app with ngrok
+
+Open a new terminal window and run:
+
+ngrok http 8051
+
+Ngrok will generate a public URL (usually https://xxxx.ngrok.io) forwarding to your local app.
+
+---
+
+Step 4: Access your app remotely
+
+Copy the HTTPS URL provided by ngrok and open it in any browser to access your Streamlit app over the internet.
+
+---
+
+Troubleshooting Tips
+
+- If you encounter connection errors, try running ngrok with the host header option:
+
+  ngrok http -host-header=localhost 8051
+
+- Ensure no firewall or antivirus software is blocking port 8051.
+
+- Always start your Streamlit app before running ngrok.
